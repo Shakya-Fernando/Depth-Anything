@@ -14,6 +14,7 @@ ipython_config.py
 data/
 env/
 metric_depth/checkpoints/
+metric_depth/my_test/
 
 
 # Remove previous ipynb_checkpoints
