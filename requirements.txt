@@ -3,11 +3,11 @@ gradio==4.14.0
 torch
 torchvision
 opencv-python
-matplotlib=3.6.2
-matplotlib-base=3.6.2
-numpy=1.24.1
-scipy=1.10.0
-huggingface-hub==0.11.1
+matplotlib==3.6.2
+# matplotlib-base==3.6.2
+numpy
+scipy
+huggingface-hub
 timm==0.6.12
 tqdm==4.64.1
 wandb==0.13.9
