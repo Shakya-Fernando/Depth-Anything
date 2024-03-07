@@ -5,6 +5,7 @@ torchvision
 opencv-python
 matplotlib==3.6.2
 # matplotlib-base==3.6.2
+h5py==3.7.0
 numpy
 scipy
 huggingface-hub
