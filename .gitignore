@@ -16,6 +16,7 @@ env/
 metric_depth/checkpoints/
 metric_depth/my_test/
 assets/test
+depth_vis/
 
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
