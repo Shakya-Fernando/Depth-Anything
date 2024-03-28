@@ -22,17 +22,15 @@ FX = 256 * 0.6
 NYU_DATA = False
 FINAL_HEIGHT = 256
 FINAL_WIDTH = 256
-INPUT_DIR = "./my_test/input"
-OUTPUT_DIR = "./my_test/output"
 DATASET = "nyu"  # Lets not pick a fight with the model's dataloader
 
 
-def process_images(model):
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
+def process_images(model, input_dir, output_dir):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
-    image_paths = glob.glob(os.path.join(INPUT_DIR, "*.png")) + glob.glob(
-        os.path.join(INPUT_DIR, "*.jpg")
+    image_paths = glob.glob(os.path.join(input_dir, "*.png")) + glob.glob(
+        os.path.join(input_dir, "*.jpg")
     )
     for image_path in tqdm(image_paths, desc="Processing Images"):
         try:
@@ -74,7 +72,7 @@ def process_images(model):
             pcd.colors = o3d.utility.Vector3dVector(colors)
             o3d.io.write_point_cloud(
                 os.path.join(
-                    OUTPUT_DIR,
+                    output_dir,
                     os.path.splitext(os.path.basename(image_path))[0] + ".ply",
                 ),
                 pcd,
@@ -83,26 +81,44 @@ def process_images(model):
             print(f"Error processing {image_path}: {e}")
 
 
-def main(model_name, pretrained_resource):
+def main(model_name, pretrained_resource, input_dir, output_dir):
     config = get_config(model_name, "eval", DATASET)
     config.pretrained_resource = pretrained_resource
     model = build_model(config).to("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
-    process_images(model)
+    process_images(model, input_dir, output_dir)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-m", "--model", type=str, default="zoedepth", help="Name of the model to test"
+        "-m",
+        "--model",
+        type=str,
+        default="zoedepth",
+        help="Name of the model to test",
     )
     parser.add_argument(
         "-p",
         "--pretrained_resource",
         type=str,
-        default="local::./checkpoints/depth_anything_metric_depth_indoor.pt",
+        default="local::./metric_depth/checkpoints/depth_anything_metric_depth_indoor.pt",
         help="Pretrained resource to use for fetching weights.",
+    )
+    parser.add_argument(
+        "--input_dir",
+        type=str,
+        default="metric_depth/my_test/input",
+        help="Directory where input images are stored.",
+    )
+    parser.add_argument(
+        "--output_dir",
+        type=str,
+        default="metric_depth/my_test/output",
+        help="Directory where output point cloud files will be saved.",
     )
 
     args = parser.parse_args()
-    main(args.model, args.pretrained_resource)
+    main(args.model, args.pretrained_resource, args.input_dir, args.output_dir)
+
+    # python3 metric_depth/depth_to_pointcloud.py --input_dir metric_depth/my_test/input/  --output_dir metric_depth/my_test/output
