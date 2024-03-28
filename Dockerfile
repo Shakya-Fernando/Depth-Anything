@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Clone the original depth anything repository
+RUN git clone https://github.com/Shakya-Fernando/Depth-Anything 
+
 # Set the working directory in the container
 WORKDIR /app
 
