@@ -3,6 +3,7 @@ gradio==4.14.0
 torch
 torchvision
 opencv-python
+open3d
 matplotlib==3.6.2
 # matplotlib-base==3.6.2
 h5py==3.7.0
