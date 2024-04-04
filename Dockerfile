@@ -23,8 +23,5 @@ WORKDIR /app/Depth-Anything
 # Install Python dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make scripts executable
-RUN chmod +x entrypoint.sh download_models.sh
-
 # Set the entrypoint to the entry script
 ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
