@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Clone the specific GitHub repository
-RUN git clone https://github.com/LiheYoung/Depth-Anything.git /app/Depth-Anything
+RUN git clone https://github.com/Shakya-Fernando/Depth-Anything /app/Depth-Anything
 
 # Change WORKDIR to the cloned repo
 WORKDIR /app/Depth-Anything
