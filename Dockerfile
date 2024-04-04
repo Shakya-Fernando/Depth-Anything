@@ -23,10 +23,6 @@ WORKDIR /app/Depth-Anything
 # Install Python dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application source code and scripts
-COPY entrypoint.sh .
-COPY download_models.sh .
-
 # Make scripts executable
 RUN chmod +x entrypoint.sh download_models.sh
 
