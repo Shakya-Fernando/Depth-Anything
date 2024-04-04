@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Download the models
-./download_models.sh
+# Execute the download models script
+/bin/bash download_models.sh
 
 # Proceed with the main command
 exec "$@"
