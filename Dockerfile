@@ -19,6 +19,7 @@ RUN git clone https://github.com/Shakya-Fernando/Depth-Anything /app/Depth-Anyth
 
 # Change WORKDIR to the cloned repo
 WORKDIR /app/Depth-Anything
+RUN ls -la
 
 # Install Python dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
